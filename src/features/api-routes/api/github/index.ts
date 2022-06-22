@@ -66,20 +66,6 @@ export async function upsertMetadataComment(params: {
 
 export async function updateMetadataComment() {}
 
-export async function getMetadataComment(issueNumber: number) {
-  const { data = [] } = await octokit.rest.issues.listComments({
-    owner: config.github.repoOwner,
-    repo: config.github.repoName,
-    issue_number: issueNumber,
-  });
-
-  const metadataComment = data.find((comment) => {
-    const match = comment.body?.match(metadataCommentRegex);
-    return Boolean(match);
-  });
-
-  return metadataComment;
-}
 
 export async function getMetadataCommentId(issueNumber: number) {
   const { data = [] } = await octokit.rest.issues.listComments({
