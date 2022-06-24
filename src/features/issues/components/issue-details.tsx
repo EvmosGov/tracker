@@ -22,12 +22,15 @@ export function IssueDetails(props: { issueNumber: number }) {
   }
 
   return (
-    <div className="max-w-4xl grid grid-cols-5 mx-auto">
+    <div className="sm:max-w-4xl md:max-w-none grid grid-cols-5 space-x-3 mx-auto  ">
       <div className="col-span-5">
         <IssueDetailsHeading issue={issue} />
       </div>
-      <div className="col-span-4">
-        <div className="prose dark:prose-invert">
+      <div className="col-span-1 !-ml-2">
+        <div className="h-96 bg-gray-200"></div>
+      </div>
+      <div className="col-span-3">
+        <div className="prose dark:prose-invert px-8">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {issue.body}
           </ReactMarkdown>

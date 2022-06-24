@@ -2,30 +2,22 @@ import config from "config";
 
 const BETTER_LINKS = [
   {
-    label: "Homepage",
+    label: "Proposal Lifecycle",
     link: config.site.url,
   },
   {
-    label: "Documentation",
+    label: "Proposal Templates",
     link: config.site.externalLinks.docs,
-  },
-  {
-    label: "Discord",
-    link: `https://discord.com/invite/${config.site.externalLinks.discord}`,
-  },
-  {
-    label: "Twitter",
-    link: `https://twitter.com/${config.site.externalLinks.twitter}`,
-  },
+  }
 ];
 
 const EXTERNAL_LINKS = [
   {
-    label: "Homepage",
+    label: "Evmos Documentation",
     link: config.site.url,
   },
   {
-    label: "Add new issue",
+    label: "Discussions",
     link: `https://github.com/${config.github.repoOwner}/${config.github.repoName}/issues/new/choose`,
   },
 ];
@@ -38,8 +30,8 @@ export function Footer() {
         <div className="grid grid-cols-3 p-4 text-gray-500 dark:text-zinc-500">
           <div>
             Powered by{" "}
-            <a href="https://betterhq.org/" target="_blank" rel="noreferrer">
-              Better
+            <a href="https://evmos.vision" target="_blank" rel="noreferrer">
+              Evmos Vision
             </a>{" "}
             © 2022
           </div>
@@ -58,7 +50,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <div className="mb-2 font-medium uppercase">Better</div>
+            <div className="mb-2 font-medium uppercase">Docs</div>
             <ul className="space-y-1">
               {BETTER_LINKS.map(({ label, link }) => (
                 <li key={label}>

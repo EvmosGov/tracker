@@ -65,7 +65,7 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
   }, [bounty, pool]);
 
   return (
-    <aside>
+    <aside className="bg-gray-200 p-6">
       <SidebarItem title="Status" content={<StatusLabel status="open" />} />
       <SidebarItem
         title="Total bounty sum"
