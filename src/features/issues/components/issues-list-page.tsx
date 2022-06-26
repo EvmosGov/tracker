@@ -7,10 +7,11 @@ import type { NextPage } from "next";
 const IssuesListPage: NextPage = () => {
   return (
     <Layout title="Home">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-2">
-        <IssuesList issueType={issueTypes.OPEN} title="Open" />
-        <IssuesList issueType={issueTypes.IN_PROGRESS} title="In Progress" />
-        <IssuesList issueType={issueTypes.LIVE} title="Live" />
+      <div className="grid grid-cols-4 space-x-4 text-gray-800">
+        <IssuesList issueType={issueTypes.SIGNALING} colColor="border-blue-300" title="Known Issue or Task"  icon="fa-solid fa-circle-exclamation"/>
+        <IssuesList issueType={issueTypes.DRAFT} colColor="border-yellow-300" title="In Progress"  icon="fa-solid fa-building-columns"/>
+        <IssuesList issueType={issueTypes.REVIEW} colColor="border-orange-300" title="Proposed to Community"  icon="fa-solid fa-bullhorn"/>
+        <IssuesList issueType={issueTypes.ONCHAIN} colColor="border-green-300" title="Onchain Voting" icon="fa-solid fa-check-to-slot" />
       </div>
     </Layout>
   );
