@@ -3,4 +3,5 @@ export type Metadata = {
     chain: string;
     bountyId: number;
   }[];
+  address: string
 };

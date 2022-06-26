@@ -2,9 +2,10 @@ export const githubConfig = {
   repoOwner: process.env.NEXT_PUBLIC_REPO_OWNER || "",
   repoName: process.env.NEXT_PUBLIC_REPO_NAME || "",
   labels: {
-    open: ["open"],
-    inProgress: ["inProgress"],
-    live: ["live"],
+    signaling: ["signaling"],
+    draft: ["draft"],
+    review: ["review"],
+    onchain: ["onchain"],
   },
 
   // secret
@@ -23,7 +24,7 @@ export const nearChainConfig = {
 
 export const siteConfig = {
   enabledChains: ["near"],
-  projectName: "Better",
+  projectName: "Evmos Proposals",
   title: "Better Roadmap",
   metaDescription: "Better Roadmap",
   url: "https://roadmap.betterhq.org/",
