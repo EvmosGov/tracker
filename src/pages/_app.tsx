@@ -5,8 +5,8 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import "../styles/globals.css";
 import "../styles/fonts.css";
 import '@rainbow-me/rainbowkit/styles.css';
-import { connectorsForWallets, wallet, RainbowKitProvider, Chain, DisclaimerComponent, darkTheme } from '@rainbow-me/rainbowkit';
-import { chain, ChainProvider, configureChains, createClient, WagmiConfig } from 'wagmi';
+import { connectorsForWallets, wallet, RainbowKitProvider, Chain, darkTheme } from '@rainbow-me/rainbowkit';
+import { chain, ChainProvider, configureChains, createClient, createStorage, WagmiConfig } from 'wagmi';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -53,17 +53,9 @@ const connectors = connectorsForWallets([
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
-  provider,
+  provider
 });
 
-const Disclaimer: DisclaimerComponent = ({ Text, Link }) => (
-  <Text>
-    By connecting your wallet, you agree to the{' '}
-    <Link href="https://termsofservice.xyz">Terms of Service</Link> and
-    acknowledge you have read and understand the protocol{' '}
-    <Link href="https://disclaimer.xyz">Disclaimer</Link>
-  </Text>
-);
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());
@@ -72,9 +64,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider 
             appInfo={{
-              appName: 'RainbowKit Demo',
-              disclaimer: Disclaimer,
-              learnMoreUrl: 'https://learnaboutcryptowallets.example',
+              appName: 'EvmosTracker',
             }}
             chains={chains}
             theme={darkTheme()}

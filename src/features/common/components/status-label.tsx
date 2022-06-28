@@ -11,10 +11,10 @@ export default function StatusLabel(props: { status: IssueType }) {
         {props.status}
       </div>
       <div className="flex flex-grow rounded-r-sm border-1 px-3 py-1.5 w-1/4 border-gray-500 bg-gray-400 text-gray-800 uppercase">
-        DAY 2
+        TBA
       </div>
     </div>
-    <div className="flex flex-row justify-stretch w-full text-sm">
+    {/* <div className="flex flex-row justify-stretch w-full text-sm">
         <div className="flex rounded-l-sm border-1 w-8 text-center px-3 py-1.5 border-gray-500 bg-gray-300 text-gray-800 uppercase">
           🛑
         </div>
@@ -46,7 +46,7 @@ export default function StatusLabel(props: { status: IssueType }) {
         <div className="flex flex-grow rounded-r-sm border-1 px-3 py-1.5 w-1/4 border-gray-500 bg-gray-400 text-gray-800 uppercase">
           N/A
         </div>
-      </div>
+      </div> */}
       </>
   );
 }

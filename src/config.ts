@@ -2,9 +2,9 @@ export const githubConfig = {
   repoOwner: process.env.NEXT_PUBLIC_REPO_OWNER || "",
   repoName: process.env.NEXT_PUBLIC_REPO_NAME || "",
   labels: {
-    signaling: ["signaling"],
-    draft: ["draft"],
-    review: ["review"],
+    planned: ["planned"],
+    inprogress: ["inprogress"],
+    proposed: ["proposed"],
     onchain: ["onchain"],
   },
 

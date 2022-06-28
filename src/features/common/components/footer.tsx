@@ -1,36 +1,51 @@
 import config from "config";
 
-const BETTER_LINKS = [
+const EVMOS_LINKS = [
   {
     label: "Evmos App",
-    link: config.site.url,
+    link: "https://app.evmos.org/",
   },
   {
     label: "Documentation",
-    link: config.site.externalLinks.docs,
+    link: "https://docs.evmos.org/",
+  },
+  {
+    label: "Evmos Grants",
+    link: "https://medium.com/evmos/announcing-evmos-grants-78aa28562db6",
   },
 
 ];
 
 const EXTERNAL_LINKS = [
   {
-    label: "Proposal Guidelines",
-    link: config.site.url,
+    label: "Governance Overview",
+    link: "https://docs.evmos.org/validators/governance/overview.html",
+  },  
+  {
+    label: "Commonwealth Discussions",
+    link: "https://commonwealth.im/evmos/",
   },
   {
-    label: "Governance",
-    link: `https://github.com/${config.github.repoOwner}/${config.github.repoName}/issues/new/choose`,
+    label: "Evmos Governance Paradigm",
+    link: "https://evmos.vision/articles/evmos-governance-problem-space",
   },
 ];
 
 const SOCIAL_LINKS = [
   {
     label: "Discord",
-    link: `https://discord.com/invite/${config.site.externalLinks.discord}`,
+    link: "https://discord.gg/evmos",
+    icon: "fa-brands fa-discord"
   },
   {
     label: "Twitter",
-    link: `https://twitter.com/${config.site.externalLinks.twitter}`,
+    link: "https://twitter.com/EvmosOrg",
+    icon: "fa-brands fa-twitter"
+  },
+  {
+    label: "Telegram",
+    link: "https://t.me/EvmosOrg",
+    icon: "fa-brands fa-telegram"
   },
 ];
 
@@ -38,18 +53,17 @@ export function Footer() {
   return (
     <footer className="bg-gray-800 py-10">
       <div className="container mx-auto">
-        <div className="border-gray-700 border-opacity-20 dark:border-zinc-800 border-b-2" />
         <div className="grid grid-cols-4 p-4 text-gray-500 dark:text-zinc-500">
           <div>
             Powered by{" "}
-            <a href="https://betterhq.org/" target="_blank" rel="noreferrer">
+            <a href="https://evmos.vision" target="_blank" rel="noreferrer">
               Evmos Vision
             </a>{" "}
             
           </div>
           <div>
             <div className="mb-2 font-medium uppercase">
-              {config.site.projectName}
+              GOVERNANCE LINKS
             </div>
             <ul className="space-y-1">
               {EXTERNAL_LINKS.map(({ label, link }) => (
@@ -62,9 +76,9 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <div className="mb-2 font-medium uppercase">EVMOS LINKS</div>
+            <div className="mb-2 font-medium uppercase">IMPORTANT LINKS</div>
             <ul className="space-y-1">
-              {BETTER_LINKS.map(({ label, link }) => (
+              {EVMOS_LINKS.map(({ label, link }) => (
                 <li key={label}>
                   <a href={link} target="_blank" rel="noreferrer">
                     {label}
@@ -76,9 +90,10 @@ export function Footer() {
           <div>
             <div className="mb-2 font-medium uppercase">EVMOS SOCIAL</div>
             <ul className="space-y-1">
-              {SOCIAL_LINKS.map(({ label, link }) => (
+              {SOCIAL_LINKS.map(({ label, link, icon }) => (
                 <li key={label}>
                   <a href={link} target="_blank" rel="noreferrer">
+                  <i className={`${icon} inline w-6 h-6 mr-2`}></i>
                     {label}
                   </a>
                 </li>

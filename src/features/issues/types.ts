@@ -1,4 +1,4 @@
-export type IssueType = "signaling" | "draft" | "review" | "onchain";
+export type IssueType = "planned" | "inprogress" | "proposed" | "onchain";
 
 export type Metadata = {
   bounties: {

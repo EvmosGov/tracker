@@ -1,5 +1,6 @@
 import Link from "next/link";
-
+import { useAccount, useEnsName } from 'wagmi'
+import { parseDate } from '../../../utils/helpers'
 import ListItemMetadata from "./list-item-metadata";
 
 import type { Issue, Label } from "../types";
@@ -26,20 +27,71 @@ type Props = {
 
 export function IssuesListItem(props: Props) {
   const { issue } = props;
-  const signedInAccountQuery = useWalletSignedInAccountQuery();
-  const canVote = useVotingAccessQuery();
+  const canVote = useAccount()
   const addVote = useVote();
   const { data } = useIssueVoteCount(issue.number);
-
+  const issueDate = parseDate(issue.created_at);
+  console.log(canVote)
   return (
-    <li className="dark:hover:bg-zinc-800 hover:shadow-xl cursor-pointer overlow">
+    <li className="flex w-full justify-between bg-white hover:shadow-xl cursor-pointer overlow mb-0 pb-0">
 <Link passHref href={`/issues/${issue.number}`}>
-    <div className="p-6 bg-white rounded-none  shadow border-b border-b-slate-300">
-   
-    <div className="mb-4">
-      <h3 className="mb-2 font-medium" data-config-id="title1">{issue.title}</h3>
-      <p className="text-sm text-gray-500" data-config-id="desc1">{`#${issue.number} opened on ${issue.created_at} by ${issue.user.login}`}</p>
+    <div className="p-6 bg-white rounded-none shadow border-b border-b-slate-300 w-full">
+    <div className="flex flex-row justify-between mb-4">
+    <div className="flex flex-col mb-2 pr-2 ">
+      <h3 className="mb-2 font-bold" data-config-id="title1">{issue.title}</h3>
+      <hr className="w-5/6 mb-2"/>
+      <p className="text-sm text-gray-500" data-config-id="desc1"><span className="font-semibold">Issue Opened:</span> {`${issueDate}
+      `}</p>      
+      <p className="text-sm text-gray-500" data-config-id="desc1"><span className="font-semibold">Submitted by:</span> {`${issue.user.login}`}</p>
+
+
     </div>
+    <div className="flex flex-col h-fit justify-start items-center bg-slate-200 p-2 rounded-md">
+        <span>{data?.votes}</span>
+        <IoIosArrowUp
+          className={`text-[1.5rem] opacity-50 transition-all duration-300 hover:opacity-100 ${
+            data?.voters?.includes(canVote.data?.address + "_up") &&
+            "text-[#2081e2] opactity-100"
+          }`}
+          onClick={async (e) => {
+            e.stopPropagation();
+            if (!canVote)
+              return alert("You need to be signed in");
+            if (!canVote.data) return alert("You don't have access to vote");
+            try {
+              addVote.mutate({
+                issueNumber: issue.number,
+                isUpVote: true,
+                walletId: canVote?.data?.address,
+              });
+            } catch (e) {
+              console.error(e);
+            }
+          }}
+        />
+        <IoIosArrowDown
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!canVote)
+              return alert("You need to be signed in");
+            if (!canVote.data) return alert("You don't have access to vote");
+            try {
+              addVote.mutate({
+                issueNumber: issue.number,
+                isUpVote: false,
+                walletId: canVote?.data?.address,
+              });
+            } catch (e) {
+              console.error(e);
+            }
+          }}
+          className={`text-[1.5rem] opacity-50 transition-all duration-300 hover:opacity-100 ${
+            data?.voters?.includes(canVote?.data?.address + "_down") &&
+            "text-red-500"
+          }`}
+        />
+      </div>
+      </div>
     <div className="flex justify-between">
     
       <div className="flex">
@@ -53,11 +105,11 @@ export function IssuesListItem(props: Props) {
         </a>
         <a className="flex items-center text-xs text-gray-500" href="#">
           <span className="mr-2">
-            <svg className="h-4 w-4 text-gray-400" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13.0837 9.33334L7.91699 14.5C6.50032 15.9167 4.25033 15.9167 2.91699 14.5C1.50033 13.0833 1.50033 10.8333 2.91699 9.50001L9.58366 2.83334C10.417 2.08334 11.667 2.08334 12.5003 2.83334C13.3337 3.66668 13.3337 5.00001 12.5003 5.75001L6.75033 11.5C6.50033 11.75 6.08366 11.75 5.83366 11.5C5.58366 11.25 5.58366 10.8333 5.83366 10.5833L10.0837 6.33334C10.417 6.00001 10.417 5.50001 10.0837 5.16668C9.75032 4.83334 9.25032 4.83334 8.91699 5.16668L4.66699 9.50001C3.75033 10.4167 3.75033 11.8333 4.66699 12.75C5.58366 13.5833 7.00032 13.5833 7.91699 12.75L13.667 7.00001C15.167 5.50001 15.167 3.16668 13.667 1.66668C12.167 0.166676 9.83366 0.166676 8.33366 1.66668L1.66699 8.33334C0.666992 9.33334 0.166992 10.6667 0.166992 12C0.166992 14.9167 2.50032 17.1667 5.41699 17.1667C6.83366 17.1667 8.08366 16.5833 9.08366 15.6667L14.2503 10.5C14.5837 10.1667 14.5837 9.66668 14.2503 9.33334C13.917 9.00001 13.417 9.00001 13.0837 9.33334Z" fill="currentColor"></path>
-            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+</svg>
           </span>
-          <span data-config-id="val1-2">2</span>
+          <span data-config-id="val1-2"> {issue.number} </span>
         </a>
       
       </div>
@@ -77,55 +129,11 @@ export function IssuesListItem(props: Props) {
     </div>
 
 
-          <ListItemMetadata metadata={issue.metadata} />
-        </div>
-      </Link>
-
-      <div className="flex flex-col justify-center items-center ">
-        <span>{data?.votes}</span>
-        <IoIosArrowUp
-          className={`text-[1.5rem] opacity-50 transition-all duration-300 hover:opacity-100 ${
-            data?.voters?.includes(signedInAccountQuery.data + "_up") &&
-            "text-[#FF6CE5] opactity-100"
-          }`}
-          onClick={async (e) => {
-            e.stopPropagation();
-            if (!signedInAccountQuery.data)
-              return alert("You need to be signed in");
-            if (!canVote.data) return alert("You don't have access to vote");
-            try {
-              addVote.mutate({
-                issueNumber: issue.number,
-                isUpVote: true,
-                walletId: signedInAccountQuery.data,
-              });
-            } catch (e) {
-              console.error(e);
-            }
-          }}
-        />
-        <IoIosArrowDown
-          onClick={(e) => {
-            e.stopPropagation();
-            if (!signedInAccountQuery.data)
-              return alert("You need to be signed in");
-            if (!canVote.data) return alert("You don't have access to vote");
-            try {
-              addVote.mutate({
-                issueNumber: issue.number,
-                isUpVote: false,
-                walletId: signedInAccountQuery.data,
-              });
-            } catch (e) {
-              console.error(e);
-            }
-          }}
-          className={`text-[1.5rem] opacity-50 transition-all duration-300 hover:opacity-100 ${
-            data?.voters?.includes(signedInAccountQuery.data + "_down") &&
-            "text-red-500"
-          }`}
-        />
+      <ListItemMetadata metadata={issue.metadata} />
+    
       </div>
+      </Link>
     </li>
+    
   );
 }

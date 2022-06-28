@@ -71,51 +71,23 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
       <SidebarItemNoHead
         content={
           <div>
-            <span className="font-semibold">Proposer:</span> {props.issue.user.login}<br />
+            <span className="font-semibold">Submitted by:</span> {props.issue.user.login}<br />
             <span className="font-semibold">Date Proposed:</span> {<span>{parseDate(props?.issue.created_at)}</span>}
           </div>
         }
       />      
-      <SidebarItem title="Proposal Stage" content={<StatusLabel status="signaling" />} />
+      <SidebarItem title="Proposal Stage" content={<StatusLabel status="planned" />} />
       
 
       <SidebarItem
         title="Amounted Requested"
         content={
           <div>
-            {fundsReq + " EVMOS"} <br /> Dollar Amount: ${poolInDollars}
+            N/A
           </div>
         }
       />     
-       <SidebarItemSentiment
-        group="Community"
-        content={
-          <>
-          <div className="mb-4">
-            <span className="text-sm">Community Sentiment:</span>
-            <progress className="progress progress-success w-full bg-gray-200" value="80" max="100"></progress> 
-            <span className="text-xs">80% of 40 in favor</span>             
-            <progress className="progress progress-accent w-full bg-gray-200" value="12" max="100"></progress> 
-            <span className="text-xs">12% of 40 against</span>           
-          </div>
-          <hr className="py-1" />
-          <div className="mb-4">
-          <span className="text-sm">Validator Sentiment:</span>
-              <progress className="progress progress-success w-full bg-gray-200" value="60" max="100"></progress>
-              <span className="text-xs">60% of 18 in favor</span>               
-              <progress className="progress progress-accent w-full bg-gray-200" value="25" max="100"></progress>
-              <span className="text-xs">25% of 18 against</span>           
-            </div>
-            <div className="mt-6">
-
-            <div className="alert alert-success shadow-lg text-sm mt-6 justify-start">
-    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-    <span className="font-semibold">Passing</span>
-  </div>
-</div>
-            </>
-        }
-      />
+    
       {bounty && (
         <SidebarItem
           title="Deadline"
@@ -147,7 +119,7 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
       </div>
       {!walletIsSignedInQuery.data && (
         <p className="text-xs text-center mt-2 text-gray-500 dark:text-zinc-500">
-          By adding a sponsorship amount to the proposal, you are showing strong support. The bounty will be used to fund the deposit amount if and when the proposal goes to vote onchain.
+          By adding a sponsorship amount to the initiative, you are showing strong support. The EVMOS will be used to fund the deposit amount if and when the proposal goes to vote onchain and the excess amount will be used to reward those that have played a role in solving the problem.
         </p>
       )}
     </aside>
