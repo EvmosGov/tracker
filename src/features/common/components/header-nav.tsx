@@ -43,7 +43,7 @@ export default function HeaderNav() {
 
           <div className="hidden xl:flex lg:justify-end lg:items-center lg:space-x-6 mr-6 ml-auto">
             <div className="flex items-center">
-              <ConnectButton showBalance={false} />
+              <ConnectButton />
             </div>
           </div>
           <div className="ml-auto flex xl:hidden">

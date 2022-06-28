@@ -33,7 +33,7 @@ const evmos: Chain = {
 
 
 const { chains, provider } = configureChains(
-  [evmos, chain.mainnet],
+  [evmos],
   [
     jsonRpcProvider({ rpc: () => ({ http: 'https://evmos-mainnet.gateway.pokt.network/v1/lb/62a98f3b123e6f00396a2714' }) }),
     publicProvider(),
