@@ -36,9 +36,9 @@ export function IssuesList(props: { title: string; issueType: IssueType, colColo
     <ul>
 
         {isLoading ? (
-          <div className="text-center p-4">Loading...</div>
+          <div className="text-center p-4 text-white">Loading...</div>
         ) : isError ? (
-          <div className="text-center p-4">Error: {error}</div>
+          <div className="text-center p-4 text-red-400">Error: {error}</div>
         ) : data.length === 0 ? (
           <div className={`flex flex-rowdark:border-zinc-800 w-full`}>
           <div className={`pt-3 px-6 mb-0 bg-white rounded-sm rounded-b-none shadow w-full`}>
