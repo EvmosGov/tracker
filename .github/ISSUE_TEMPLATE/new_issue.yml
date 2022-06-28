@@ -1,5 +1,5 @@
 name: New Governance Issue
-description: File a governance related issue/
+description: File a governance related issue
 title: '<title>'
 body:
   - type: markdown
