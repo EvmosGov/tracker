@@ -23,17 +23,12 @@ export const nearChainConfig = {
 };
 
 export const siteConfig = {
-  enabledChains: ["near"],
+  enabledChains: ["near", "evmos"],
   projectName: "Evmos Proposals",
-  title: "Better Roadmap",
-  metaDescription: "Better Roadmap",
-  url: "https://roadmap.betterhq.org/",
-  metaImg: "https://raw.githubusercontent.com/better-feedback/better-app/1926cf0a2327e629128f65e57edeee7440294e0b/public/metaTagImg.jpg?token=AF6ZD6A7XI4IS7I3MRLDQSDCTY6QK",
-  externalLinks: {
-    docs: "https://github.com/better-feedback/roadmap#readme",
-    discord: "wwwwRFa6aj",
-    twitter: "betterdao",
-  },
+  title: "Evmos Governance Issue Tracker",
+  metaDescription: "An issue tracker for all things related to Evmos governance.",
+  url: "https://tracker.evmos.vision",
+  metaImg: "/card.png",
 };
 
 export const config = {
