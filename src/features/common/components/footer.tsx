@@ -20,7 +20,7 @@ const EXTERNAL_LINKS = [
   {
     label: "Governance Overview",
     link: "https://docs.evmos.org/validators/governance/overview.html",
-  },  
+  },
   {
     label: "Commonwealth Discussions",
     link: "https://commonwealth.im/evmos/",
@@ -53,13 +53,13 @@ export function Footer() {
   return (
     <footer className="bg-gray-800 py-10">
       <div className="container mx-auto">
-        <div className="grid grid-cols-4 p-4 text-gray-500 dark:text-zinc-500">
+        <div className="grid grid-cols-1 md:grid-cols-4 p-4 text-gray-500 dark:text-zinc-500 space-y-6">
           <div>
             Powered by{" "}
             <a href="https://evmos.vision" target="_blank" rel="noreferrer">
               Evmos Vision
             </a>{" "}
-            
+
           </div>
           <div>
             <div className="mb-2 font-medium uppercase">
@@ -86,7 +86,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>          
+          </div>
           <div>
             <div className="mb-2 font-medium uppercase">EVMOS SOCIAL</div>
             <ul className="space-y-1">
