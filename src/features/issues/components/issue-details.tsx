@@ -24,7 +24,7 @@ export function IssueDetails(props: { issueNumber: number }) {
 
   return (
     <div className="grid grid-cols-5 mx-auto">
-          <div className="col-span-5 md:col-span-1 pr-8 row-span-3 mb-8 md:mb-0">
+          <div className="order-last col-span-5 row-span-1 md:order-first md:col-span-1 pr-2 md:pr-8 md:row-span-3 mb-8 md:mb-0">
           <IssueDetailsLeftbar issue={issue} />
 
                   </div>
@@ -35,7 +35,7 @@ export function IssueDetails(props: { issueNumber: number }) {
 
       <div className="col-span-5 md:col-span-3 col-start-1 md:col-start-2 row-start-auto">
 
-        <div className="prose lg:prose-lg dark:prose-invert">
+        <div className="prose md:pr-6 lg:pr-4 lg:prose-lg dark:prose-invert">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {issue.body}
           </ReactMarkdown>

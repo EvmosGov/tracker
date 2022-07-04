@@ -34,7 +34,7 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
     <aside className="space-y-3">
               <SidebarItem
           title="About Evmos Vision"
-          content={<div className="text-xs">EvmosVision is a project led by LPX to help the Evmos network develop strong governance practices and provide tools that will help the community stay up to date with the ongoing governance efforts.</div>}
+          content={<div className="text-xs">GovTracker is a project led by LPX to help the Evmos network develop strong governance practices and provide tools that will help the community stay up to date with the ongoing governance efforts.</div>}
         />              
 
     <SidebarItemLink
@@ -46,8 +46,8 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
     <SidebarItemLink
       title="Have an awesome idea or project?"
       subtitle="Get help"
-      link="https://evmos.vision"
-      content={<div className="text-xs mt-2">While the governance framework is under work, let us help you write a killer proposal.</div>}
+      link="https://discord.gg/evmos"
+      content={<div className="text-xs mt-2">While the governance framework is under work, let us help you write a killer proposal. Reach out to LPX on Discord.</div>}
     />
               
     </aside>
