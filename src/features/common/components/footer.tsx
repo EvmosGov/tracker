@@ -54,14 +54,20 @@ export function Footer() {
     <footer className="bg-gray-800 py-10">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 p-4 text-gray-500 dark:text-zinc-500 space-y-6">
-          <div>
+          <div className="self-center">
             Powered by{" "}
             <a href="https://evmos.vision" target="_blank" rel="noreferrer">
               Evmos Vision
             </a>{" "}
-
+            <hr className="w-2/3 my-4 opacity-25"/>
+            <span className="text-xs">
+            Shoutout to{" "}
+            <a href="https://github.com/better-feedback" target="_blank" rel="noreferrer">
+              BetterHQ ❤
+            </a>{" "}
+            </span>
           </div>
-          <div>
+          <div className="self-center">
             <div className="mb-2 font-medium uppercase">
               GOVERNANCE LINKS
             </div>
@@ -75,7 +81,7 @@ export function Footer() {
               ))}
             </ul>
           </div>
-          <div>
+          <div className="self-center">
             <div className="mb-2 font-medium uppercase">IMPORTANT LINKS</div>
             <ul className="space-y-1">
               {EVMOS_LINKS.map(({ label, link }) => (
@@ -87,7 +93,7 @@ export function Footer() {
               ))}
             </ul>
           </div>
-          <div>
+          <div className="self-center">
             <div className="mb-2 font-medium uppercase">EVMOS SOCIAL</div>
             <ul className="space-y-1">
               {SOCIAL_LINKS.map(({ label, link, icon }) => (
