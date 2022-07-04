@@ -40,7 +40,7 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
       });
   };
 
-  /* A hook that is called when the component is mounted. 
+  /* A hook that is called when the component is mounted.
   In order to fetch the bounty stored in the contract
  */
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
   }, [fundsReq, pool]);
 
   return (
-    <aside className="space-y-3">
+    <aside className="col-span-5 md:col-span-1 space-y-3 my-4 md:my-0">
       <SidebarItemNoHead
         content={
           <div>
@@ -75,9 +75,9 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
             <span className="font-semibold">Date Proposed:</span> {<span>{parseDate(props?.issue.created_at)}</span>}
           </div>
         }
-      />      
+      />
       <SidebarItem title="Proposal Stage" content={<StatusLabel status="planned" />} />
-      
+
 
       <SidebarItem
         title="Amounted Requested"
@@ -86,8 +86,8 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
             N/A
           </div>
         }
-      />     
-    
+      />
+
       {bounty && (
         <SidebarItem
           title="Deadline"
