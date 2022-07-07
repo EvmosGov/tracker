@@ -51,26 +51,28 @@ const SOCIAL_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-gray-800 py-10">
+    <footer className="p-4 bg-gray-800 md:py-10">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 p-4 text-gray-500 dark:text-zinc-500 space-y-6">
-          <div className="self-center">
+          <div className="font-semibold text-gray-300 self-center md:font-medium md:text-gray-500">
             Powered by{" "}
             <a href="https://evmos.vision" target="_blank" rel="noreferrer">
               Evmos Vision
             </a>{" "}
-            <hr className="w-2/3 my-4 opacity-25"/>
-            <span className="text-xs">
+            <hr className="hidden md:block w-1/3 my-4 opacity-10"/>
+            <span className="hidden md:block md:text-xs">
             Shoutout to{" "}
             <a href="https://github.com/better-feedback" target="_blank" rel="noreferrer">
               BetterHQ ❤
             </a>{" "}
             </span>
           </div>
-          <div className="self-center">
-            <div className="mb-2 font-medium uppercase">
-              GOVERNANCE LINKS
+          <div className="self-start">
+            <div className="mb-2 font-medium capitalize text-gray-400
+md:text-gray-500">
+              Governance Links
             </div>
+            <hr className="w-2/3 my-4 opacity-25"/>
             <ul className="space-y-1">
               {EXTERNAL_LINKS.map(({ label, link }) => (
                 <li key={label}>
@@ -81,8 +83,10 @@ export function Footer() {
               ))}
             </ul>
           </div>
-          <div className="self-center">
-            <div className="mb-2 font-medium uppercase">IMPORTANT LINKS</div>
+          <div className="self-start">
+            <div className="mb-2 font-medium capitalize text-gray-400
+md:text-gray-500">Important Links</div>
+            <hr className="w-2/3 my-4 opacity-25"/>
             <ul className="space-y-1">
               {EVMOS_LINKS.map(({ label, link }) => (
                 <li key={label}>
@@ -93,13 +97,15 @@ export function Footer() {
               ))}
             </ul>
           </div>
-          <div className="self-center">
-            <div className="mb-2 font-medium uppercase">EVMOS SOCIAL</div>
+          <div className="self-start">
+            <div className="mb-2 font-medium capitalize text-gray-400
+md:text-gray-500">Evmos Community</div>
+            <hr className="w-2/3 my-4 opacity-25"/>
             <ul className="space-y-1">
               {SOCIAL_LINKS.map(({ label, link, icon }) => (
                 <li key={label}>
                   <a href={link} target="_blank" rel="noreferrer">
-                  <i className={`${icon} inline w-6 h-6 mr-2`}></i>
+                  <i className={`${icon} inline w-5 h-5 mr-2`}></i>
                     {label}
                   </a>
                 </li>

@@ -47,7 +47,7 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
       title="Have an awesome idea or project?"
       subtitle="Get help"
       link="https://discord.gg/evmos"
-      content={<div className="text-xs mt-2">While the governance framework is under work, let us help you write a killer proposal. Reach out to LPX on Discord.</div>}
+      content={<div className="text-xs mt-2">While the governance framework is under work, let us help you write a killer proposal. Reach out to LPX or Tricky on Discord.</div>}
     />
               
     </aside>
