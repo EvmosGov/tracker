@@ -3,7 +3,8 @@ import * as evmosApi from "features/evmos/api";
 import type { ChainApi } from "./types";
 
 export const chains = {
-  EVMOS: "evmos"
+  EVMOS: "evmos",
+  POLYGON: "polygon",
 };
 
 export const chainsToApi: {
@@ -23,5 +24,17 @@ export const chainsToApi: {
     getBountyById: evmosApi.getBountyById,
     // Tokens API
     getTokens: evmosApi.getTokens,
+  },
+  [chains.POLYGON]: {
+    getTokens: () => {
+      return [
+        {
+          symbol: "MATIC",
+          address: "0x",
+          decimals: 18,
+          name: "Polygon Token",
+        },
+      ];
+    },
   },
 };

@@ -23,7 +23,7 @@ export const nearChainConfig = {
 };
 
 export const siteConfig = {
-  enabledChains: ["near", "evmos"],
+  enabledChains: ["near", "evmos", "polygon"],
   projectName: "Evmos Proposals",
   title: "Evmos Governance Issue Tracker",
   metaDescription: "An issue tracker for all things related to Evmos governance.",

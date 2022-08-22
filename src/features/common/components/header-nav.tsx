@@ -4,10 +4,31 @@ import { Mobile } from "../components/mobile"
 import ConnectWalletButton from "./connect-wallet-button";
 import config from "config";
 import Script from "next/script"
+import { useAccount } from 'wagmi'
+import { useEffect } from "react";
+
+import { useWalletChainQuery } from "../hooks/useWalletQueries";
 
 export default function HeaderNav() {
+
+  const { isDisconnected } = useAccount()
+
+  const { data: walletChain = "" } = useWalletChainQuery();
+
+  // Removing the wallet from local storage when the user disconnects it (Polygon only)
+  useEffect(() => {
+    const localStorageWallet = localStorage.getItem("wallet-chain")
+
+    if (isDisconnected && localStorageWallet === "polygon") {
+      localStorage.removeItem('wallet-chain')
+    }
+  }, [isDisconnected])
+
+ 
+
   return (
-    <><header className="shadow-md bg-gray-800 ">
+    <>
+    <header className="shadow-md bg-gray-800 ">
       <nav className="relative container mx-auto">
         <div className="p-6 flex items-center bg-gray-800">
           <a className="flex-shrink-0 mr-12 text-2xl text-white font-semibold" href="/" data-config-id="brand">
@@ -56,9 +77,9 @@ export default function HeaderNav() {
           </div>
         </div>
       </nav>
-    </header><Mobile />
-    
-    
+    </header>
+    <Mobile />
+
     </>
 
   );

@@ -1,4 +1,4 @@
-# Evmos Govnernance Issue Tracker
+# Evmos Governance Issue Tracker
 
 
 ## Dev

@@ -10,14 +10,14 @@ import { getVoteCount } from "features/common/hooks/useGuildQueries";
 export function IssuesList(props: { title: string; issueType: IssueType, colColor: string, icon: string }) {
   const [currentPage, setCurrentPage] = React.useState(1);
 
-  const client = useQueryClient();
+  
 
   const {
     data = [],
     isLoading,
     isError,
     error,
-  } = useIssuesQuery(props.issueType, currentPage);
+  } = useIssuesQuery(props.issueType, currentPage );
 
 
 

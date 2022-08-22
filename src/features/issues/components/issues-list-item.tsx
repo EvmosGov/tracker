@@ -7,7 +7,9 @@ import type { Issue, Label } from "../types";
 
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-import { useWalletSignedInAccountQuery } from "features/common/hooks/useWalletQueries";
+import { useWalletChainQuery, useWalletSignedInAccountQuery } from "features/common/hooks/useWalletQueries";
+
+import { CommentMatadata } from "./../../../features/api-routes/api/github/types";
 
 import {
   useVotingAccessQuery,
@@ -18,6 +20,8 @@ import { upsertMetadataComment } from "features/api-routes/api/github";
 
 import { Octokit } from "octokit";
 import config from "config";
+
+import { useAccount } from "wagmi";
 
 const octokit = new Octokit({ auth: config.github.pat });
 

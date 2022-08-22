@@ -33,7 +33,7 @@ const evmos: Chain = {
 
 
 const { chains, provider } = configureChains(
-  [evmos, chain.mainnet],
+  [evmos, chain.mainnet, chain.polygon],
   [
     jsonRpcProvider({ rpc: () => ({ http: 'https://evmos-mainnet.gateway.pokt.network/v1/lb/62a98f3b123e6f00396a2714' }) }),
     publicProvider(),
@@ -43,17 +43,20 @@ const { chains, provider } = configureChains(
 const { connectors } = getDefaultWallets({
   appName: 'InterchainDAO',
   chains
-});
+})
 
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
   provider
-});
+})
 
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());
+
+
+
 
   return (
     <WagmiConfig client={wagmiClient}>
