@@ -25,6 +25,7 @@
     "react-icons": "^4.4.0",
     "react-markdown": "^7.1.1",
     "react-query": "^3.28.0",
+    "react-router-dom": "^6.3.0",
     "remark-gfm": "^3.0.1",
     "wagmi": "^0.4.12"
   },

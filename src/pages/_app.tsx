@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import "../styles/globals.css";
 import "../styles/fonts.css";
 import '@rainbow-me/rainbowkit/styles.css';
-import { connectorsForWallets, wallet, RainbowKitProvider, Chain, darkTheme } from '@rainbow-me/rainbowkit';
+import { getDefaultWallets, wallet, RainbowKitProvider, Chain, darkTheme } from '@rainbow-me/rainbowkit';
 import { chain, ChainProvider, configureChains, createClient, createStorage, WagmiConfig } from 'wagmi';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { publicProvider } from 'wagmi/providers/public';
@@ -40,15 +40,10 @@ const { chains, provider } = configureChains(
   ]
 );
 
-const connectors = connectorsForWallets([
-  {
-    groupName: 'Connect to Evmos',
-    wallets: [
-      wallet.metaMask({ chains }),
-      wallet.walletConnect({ chains }),
-    ],
-  },
-]);
+const { connectors } = getDefaultWallets({
+  appName: 'InterchainDAO',
+  chains
+});
 
 const wagmiClient = createClient({
   autoConnect: true,
