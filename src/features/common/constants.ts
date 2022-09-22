@@ -3,7 +3,7 @@ import * as evmosApi from "features/evmos/api";
 import type { ChainApi } from "./types";
 
 export const chains = {
-  EVMOS: "evmos",
+  EVMOS: "evmostestnet",
   POLYGON: "polygon",
 };
 

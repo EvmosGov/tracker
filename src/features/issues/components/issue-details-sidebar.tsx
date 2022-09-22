@@ -133,7 +133,7 @@ export default function IssueDetailsSidebar(props: { issue: Issue }) {
       isDisabled = !bounty ||
         !walletIsSignedInQuery.data || 
         bounty?.workers?.includes(walledId?.data as string) || isApplyingToWork
-    } else if(walletChain === "polygon") {
+    } else if(walletChain === "evmostestnet") {
       isDisabled = !isConnected || isApplyingToWork || bountySolidity?.data?.id == "" || (bountySolidity?.data?.workers?.includes(address) || bountySolidity.isLoading)
     }
     

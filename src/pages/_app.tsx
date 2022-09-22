@@ -6,7 +6,7 @@ import "../styles/globals.css";
 import "../styles/fonts.css";
 import '@rainbow-me/rainbowkit/styles.css';
 import { getDefaultWallets, wallet, RainbowKitProvider, Chain, darkTheme } from '@rainbow-me/rainbowkit';
-import { chain, ChainProvider, configureChains, createClient, createStorage, WagmiConfig } from 'wagmi';
+import { chain, configureChains, createClient, createStorage, WagmiConfig } from 'wagmi';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -30,12 +30,32 @@ const evmos: Chain = {
   testnet: false,
 }
 
+const evmostest: Chain = {
+  id: 9000,
+  name: 'Evmos Testnet',
+  network: 'evmostestnet',
+  iconUrl: 'https://bafybeideiyj2cmucngncpasud7acdwug2b3uetck4qpkk7nveqqlvzs66a.ipfs.dweb.link/1_s5JqmQ9XsAJmb9sZkOKUFg.png',
+  iconBackground: '#000',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'tEvmos',
+    symbol: 'tEVMOS',
+  },
+  rpcUrls: {
+    default: 'https://eth.bd.evmos.dev:8545',
+  },
+  testnet: true,
+}
+
 
 
 const { chains, provider } = configureChains(
-  [evmos, chain.mainnet, chain.polygon],
+  [evmostest, chain.mainnet],
   [
-    jsonRpcProvider({ rpc: () => ({ http: 'https://evmos-mainnet.gateway.pokt.network/v1/lb/62a98f3b123e6f00396a2714' }) }),
+    jsonRpcProvider({ rpc: () => ({ 
+      http: 'https://eth.bd.evmos.dev:8545' 
+    
+    }) }),
     publicProvider(),
   ]
 );

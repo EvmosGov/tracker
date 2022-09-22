@@ -21,7 +21,6 @@ import { upsertMetadataComment } from "features/api-routes/api/github";
 import { Octokit } from "octokit";
 import config from "config";
 
-import { useAccount } from "wagmi";
 
 const octokit = new Octokit({ auth: config.github.pat });
 
@@ -31,7 +30,7 @@ type Props = {
 
 export function IssuesListItem(props: Props) {
   const { issue } = props;
-  const canVote = useAccount()
+  const canVote = useAccount();
   const addVote = useVote();
   const { data } = useIssueVoteCount(issue.number);
   const issueDate = parseDate(issue.created_at);

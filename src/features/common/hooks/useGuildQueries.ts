@@ -44,20 +44,9 @@ export function useVotingAccessQuery() {
         return canVote;
       });
     } else {
-      const guildData = await guild.getUserAccess(
-        parseInt(process.env.NEXT_PUBLIC_GUILD_ID as string),
-        address as string
-      );
-
-      //Getting role id by chain
-      const roleId: string = process.env.NEXT_PUBLIC_ROLE_ID as string;
-
-      //Checking if user has access to vote or not
-      guildData.forEach((access) => {
-        if (access.roleId === parseInt(roleId)) {
-          canVote = access.access;
+        if (walletChain == "") {
+          canVote = true;
         }
-      });
 
       return canVote;
     }

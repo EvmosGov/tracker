@@ -4,11 +4,14 @@ import { chainsToApi } from "../constants";
 
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 
-import { useAccount } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
+
 
 export function useWalletChainQuery() {
+  
   return useQuery(["wallet", "chain"], () => {
     const walletChain = window.localStorage.getItem("wagmi.store");
+    console.log('walletChain' + walletChain)
     return walletChain;
   });
 }
@@ -24,10 +27,10 @@ export function useWalletIsSignedInQuery() {
     }
 
     const { isSignedIn } =
-      walletChain === "near"
+      walletChain === "evmostestnet"
         ? chainsToApi[walletChain]
         : { isSignedIn: () => {} };
-    return walletChain === "near" ? isSignedIn() : isConnected;
+    return walletChain === "evmostestnet" ? isSignedIn() : isConnected;
   });
 }
 
@@ -50,7 +53,7 @@ export function useWalletSignInMutation() {
 
   const walletSignInMutation = useMutation(
     async (walletChain: string) => {
-      if (walletChain === "near") {
+      if (walletChain === "evmostestnet") {
         const { signIn } = chainsToApi[walletChain];
 
         await signIn();

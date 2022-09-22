@@ -1,30 +1,75 @@
-import Link from "next/link";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Mobile } from "../components/mobile"
 import ConnectWalletButton from "./connect-wallet-button";
-import config from "config";
-import Script from "next/script"
-import { useAccount } from 'wagmi'
+import { Mobile } from "../components/mobile"
+import { useAccount, useNetwork } from 'wagmi'
 import { useEffect } from "react";
+import {
+  useWalletChainQuery,
+  useWalletSignedInAccountQuery,
+  useWalletSignInMutation,
+  useWalletSignOutMutation,
+} from "../hooks/useWalletQueries";
+import router from 'next/router';
 
-import { useWalletChainQuery } from "../hooks/useWalletQueries";
+
+const walletChainQuery = useWalletChainQuery();
+const signedInAccountQuery = useWalletSignedInAccountQuery();
+const signInMutation = useWalletSignInMutation();
+const signOutMutation = useWalletSignOutMutation();
+
+async function handleSelectChain(chain: string) {
+  signInMutation.mutate(chain);
+}
+
+async function handleDisconnectWallet() {
+  let path = window.location.pathname;
+  if (path.includes("add-bounty")) {
+    router.replace(`/issues/${path.split("/")[2]}`);
+  }
+
+  setTimeout(() => {
+    signOutMutation.mutate();
+  }, 1000);
+}
+
 
 export default function HeaderNav() {
-
+  const { chain, chains } = useNetwork()
   const { isDisconnected } = useAccount()
-
-  const { data: walletChain = "" } = useWalletChainQuery();
+  const walletChainQuery = useWalletChainQuery();
+  const signedInAccountQuery = useWalletSignedInAccountQuery();
+  const signInMutation = useWalletSignInMutation();
+  const signOutMutation = useWalletSignOutMutation();
+  const { data: walletChain = chain?.network } = useWalletChainQuery();
 
   // Removing the wallet from local storage when the user disconnects it (Polygon only)
   useEffect(() => {
     const localStorageWallet = localStorage.getItem("wallet-chain")
 
-    if (isDisconnected && localStorageWallet === "polygon") {
+    if (isDisconnected && localStorageWallet === "evmostestnet") {
       localStorage.removeItem('wallet-chain')
     }
   }, [isDisconnected])
 
- 
+
+
+
+  
+  async function handleSelectChain(chain: string) {
+    signInMutation.mutate(chain);
+  }
+  
+  async function handleDisconnectWallet() {
+    let path = window.location.pathname;
+    if (path.includes("add-bounty")) {
+      router.replace(`/issues/${path.split("/")[2]}`);
+    }
+  
+    setTimeout(() => {
+      signOutMutation.mutate();
+    }, 1000);
+  }
+  
 
   return (
     <>
@@ -44,11 +89,11 @@ export default function HeaderNav() {
               </a>
             </li>
             <li>
-              <a className="flex mr-10 items-center text-gray-50 hover:text-gray-100 text-sm" href="#">
+              <a className="flex mr-10 items-center text-gray-50 hover:text-gray-100 text-sm" href="https://docs.evmos.community">
                 <svg className="text-gray-500 w-5 h-5 mr-2" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M9.00017 0.666748C4.41684 0.666748 0.66684 4.41675 0.66684 9.00008C0.66684 13.5834 4.41684 17.3334 9.00017 17.3334C13.5835 17.3334 17.3335 13.5834 17.3335 9.00008C17.3335 4.41675 13.5835 0.666748 9.00017 0.666748ZM2.58351 10.6667C2.41684 10.0834 2.33351 9.58342 2.33351 9.00008C2.33351 8.41675 2.41684 7.91675 2.58351 7.33342H4.16684C4.00017 8.41675 4.00017 9.58342 4.16684 10.6667H2.58351ZM3.25017 12.3334H4.41684C4.58351 13.0834 4.83351 13.8334 5.25017 14.5001C4.41684 13.9167 3.75017 13.1667 3.25017 12.3334ZM4.41684 5.66675H3.25017C3.75017 4.83342 4.41684 4.08342 5.25017 3.50008C4.83351 4.16675 4.58351 4.91675 4.41684 5.66675ZM8.16684 15.4167C7.16684 14.6667 6.41684 13.5834 6.16684 12.3334H8.16684V15.4167ZM8.16684 10.6667H5.75017C5.66684 10.0834 5.66684 9.58342 5.66684 9.00008C5.66684 8.41675 5.66684 7.91675 5.75017 7.33342H8.16684V10.6667ZM8.16684 5.66675H6.16684C6.41684 4.41675 7.16684 3.33342 8.16684 2.58341V5.66675ZM14.7502 5.66675H13.5835C13.4168 4.91675 13.1668 4.16675 12.7502 3.50008C13.5835 4.08342 14.2502 4.83342 14.7502 5.66675ZM9.83351 2.58341C10.8335 3.33342 11.5835 4.41675 11.8335 5.66675H9.83351V2.58341ZM9.83351 15.4167V12.3334H11.8335C11.5835 13.5834 10.8335 14.6667 9.83351 15.4167ZM12.2502 10.6667H9.83351V7.33342H12.2502C12.3335 8.41675 12.3335 9.58342 12.2502 10.6667ZM12.8335 14.5001C13.1668 13.8334 13.4168 13.0834 13.6668 12.3334H14.8335C14.2502 13.1667 13.5835 13.9167 12.8335 14.5001ZM13.9168 10.6667C14.0835 9.58342 14.0835 8.41675 13.9168 7.33342H15.5002C15.8335 8.41675 15.8335 9.58342 15.5002 10.6667H13.9168Z" fill="currentColor"></path>
                 </svg>
-                <span data-config-id="link2">Discover</span>
+                <span data-config-id="link2">Governance Docs</span>
               </a>
             </li>
 
@@ -64,7 +109,97 @@ export default function HeaderNav() {
 
           <div className="hidden xl:flex lg:justify-end lg:items-center lg:space-x-6 mr-6 ml-auto">
             <div className="flex items-center">
-              <ConnectButton />
+            <ConnectButton.Custom>
+      {({
+        account,
+        chain,
+        openAccountModal,
+        openChainModal,
+        openConnectModal,
+        authenticationStatus,
+        mounted,
+      }) => {
+        // Note: If your app doesn't use authentication, you
+        // can remove all 'authenticationStatus' checks
+        const ready = mounted && authenticationStatus !== 'loading';
+        const connected =
+          ready &&
+          account &&
+          chain &&
+          (!authenticationStatus ||
+            authenticationStatus === 'authenticated');
+
+        return (
+          <div
+            {...(!ready && {
+              'aria-hidden': true,
+              'style': {
+                opacity: 0,
+                pointerEvents: 'none',
+                userSelect: 'none',
+              },
+            })}
+          >
+            {(() => {
+              if (!connected) {
+                return (
+                  <button onClick={openConnectModal} type="button">
+                    Connect Wallet
+                  </button>
+                );
+              }
+
+              if (chain.unsupported) {
+                return (
+                  <button onClick={openChainModal} type="button">
+                    Wrong network
+                  </button>
+                );
+              }
+
+              return (
+                <div style={{ display: 'flex', gap: 12 }}>
+                  <button
+                    onClick={openChainModal}
+                    style={{ display: 'flex', alignItems: 'center' }}
+                    type="button"
+                  >
+                    {chain.hasIcon && (
+                      <div
+                        style={{
+                          background: chain.iconBackground,
+                          width: 12,
+                          height: 12,
+                          borderRadius: 999,
+                          overflow: 'hidden',
+                          marginRight: 4,
+                        }}
+                      >
+                        {chain.iconUrl && (
+                          <img
+                            alt={chain.name ?? 'Chain icon'}
+                            src={chain.iconUrl}
+                            style={{ width: 12, height: 12 }}
+                          />
+                        )}
+                      </div>
+                    )}
+                    {chain.name}
+                  </button>
+
+                  <button onClick={openAccountModal} type="button">
+                    {account.displayName}
+                    {account.displayBalance
+                      ? ` (${account.displayBalance})`
+                      : ''}
+                  </button>
+                </div>
+              );
+            })()}
+          </div>
+        );
+      }}
+    </ConnectButton.Custom>
             </div>
           </div>
           <div className="ml-auto flex xl:hidden">

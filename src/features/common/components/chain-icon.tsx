@@ -3,6 +3,7 @@ import React from "react";
 
 import NearLogo from "./icons/near-logo";
 import PolygonLogo from "./icons/polygon-logo";
+import EvmosLogo from "./icons/evmos-logo";
 
 const chainNameToIcon: Record<
   string,
@@ -10,6 +11,8 @@ const chainNameToIcon: Record<
 > = {
   near: NearLogo,
   polygon: PolygonLogo,
+  evmos: EvmosLogo,
+  'evmostestnet': EvmosLogo
 };
 
 export default function ChainIcon(props: {

@@ -23,11 +23,11 @@ export const nearChainConfig = {
 };
 
 export const siteConfig = {
-  enabledChains: ["near", "evmos", "polygon"],
+  enabledChains: ["near", "evmos", "polygon", "evmostestnet"],
   projectName: "Evmos Proposals",
   title: "Evmos Governance Issue Tracker",
   metaDescription: "An issue tracker for all things related to Evmos governance.",
-  url: "https://tracker.evmos.vision",
+  url: "https://www.evmos.community",
   metaImg: "/card.png",
 };
 

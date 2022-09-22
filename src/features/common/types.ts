@@ -21,3 +21,9 @@ export type ChainApi = {
   // Tokens API
   getTokens: () => Promise<Token[]>;
 };
+
+export type Network = {
+  id: number,
+  name: string,
+  network: string
+};
