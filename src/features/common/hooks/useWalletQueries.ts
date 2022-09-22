@@ -8,7 +8,8 @@ import { useAccount, useNetwork } from "wagmi";
 
 
 export function useWalletChainQuery() {
-  
+  const { isConnected } = useAccount();
+
   return useQuery(["wallet", "chain"], () => {
     const walletChain = window.localStorage.getItem("wagmi.store");
     console.log('walletChain' + walletChain)

@@ -51,7 +51,7 @@ const SOCIAL_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="p-4 bg-gray-800 md:py-10">
+    <footer className="p-4 bg-gray-800 md:py-10 md:w-screen">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 p-4 text-gray-500 dark:text-zinc-500 space-y-6">
           <div className="font-semibold text-gray-300 self-center md:font-medium md:text-gray-500">
